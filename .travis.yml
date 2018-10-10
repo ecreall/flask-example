@@ -3,3 +3,10 @@ before_install:
   - pip install -r requirements.txt
 script:
   - pytest
+before_deploy:
+  - python setup.py bdist_wheel
+deploy:
+  provider: pypi
+  user: cedricmessiant
+  password:
+    secure: mG3uu1MqEJuPDZYuRSiWqeMshoDV5Nw7xjGkjwMfoYVM+HE+EdLEkpwWuh3zt/3jXnn8wGv96+brGTzHFwDuPG9wKWy3HALPJ5B5RXWK0YxYIT6Nhydpdv5wYEFESSzxYjzG6wIlQP9BEvTQTOLagSUwajBtQdgMZkg7B71ZtQ3fjVL2ZZmRVSR/pUgaSoZPDwu6hk/RGPLMAg6UNTjVCZu1gPK9EUcCqJ0BJ3ZIlLgKfXCdATqqHygoDX2lfDpv0+ULssGqFKrGWb4C2DXuMngwC2v0gEsbA4YCTSo0OGxg2xSw5wVrP126R3Ardz2AGwS6fPQUJYM0x2seDnyuN8Rfkcc4ugfFJUZSRjGBPH9+DjoUiSV83f5ZfM/3PiCclYSP4LAF2yKXUKwPLYQxfwxFWBu8cgb/rs+E5TMOfwfSaBpmtdClTxJ9zP45/EHh2rAxsVCM596Zu+xumCnkddttV+lOBWLUOM8ma1vVr5yJXHvy4g1sB68yscu4ge8a30hxe3Qz/qXw6yystHB3Vyeq/PioTCorf6tnT31N99Zw/082QyIvrE2hiKyHHYW3n6cq/6gGPc2nHWdi2ny2twb2qGqn6Q0PwwznNmqiaHtWNCFX1HUDBKCgfrnOV8CYsq1Wj+6p6oF4HDA5k7ecVI3wrL3/ceG7heyPdEd9kOA=
