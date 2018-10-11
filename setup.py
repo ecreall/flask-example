@@ -1,6 +1,11 @@
 #!/usr/bin/env python
-from pip._internal.download import PipSession
-from pip._internal.req import parse_requirements
+try:
+    from pip._internal.req import parse_requirements
+    from pip._internal.download import PipSession
+except ImportError:
+    from pip.req import parse_requirements
+    from pip.download import PipSession
+
 from setuptools import setup, find_packages
 
 
@@ -18,7 +23,7 @@ def parse_reqs(*req_files):
 
 setup(
     name='hellobluenove',
-    version='1.9',
+    version='2.0',
     description='Simple flask app',
     author='Bluenove',
     author_email='',
