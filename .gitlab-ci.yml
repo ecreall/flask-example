@@ -21,6 +21,13 @@ build:
     - twine upload -u cedricmessiant --skip-existing dist/*
 deploy:
   stage: deploy
+  before_script:
+    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
   script:
-    - ssh-agent
     - ssh ec2-user@54.197.34.60 pip install --upgrade hellobluenove
