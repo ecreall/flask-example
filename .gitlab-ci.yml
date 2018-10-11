@@ -31,4 +31,4 @@ deploy:
     - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh ec2-user@54.197.34.60 "virtualenv venv && source venv/bin/activate && pip install --upgrade hellobluenove && FLASK_APP=hellobluenove flask run"
+    - ssh ec2-user@54.197.34.60 "killall waitress-serve && virtualenv venv && source venv/bin/activate && pip install --upgrade hellobluenove && waitress-serve --call 'hellobluenove:create_app' &"
