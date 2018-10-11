@@ -31,7 +31,4 @@ deploy:
     - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh ec2-user@54.197.34.60 virtualenv venv
-    - ssh ec2-user@54.197.34.60 source venv/bin/activate
-    - ssh ec2-user@54.197.34.60 pip install --upgrade hellobluenove
-    - ssh ec2-user@54.197.34.60 FLASK_APP=hellobluenove flask run
+    - ssh ec2-user@54.197.34.60 virtualenv venv; source venv/bin/activate; pip install --upgrade hellobluenove; FLASK_APP=hellobluenove flask run
