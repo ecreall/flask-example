@@ -30,7 +30,7 @@ deploy:
     - touch ~/.ssh/known_hosts
     - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
-    - ssh ec2-user@54.197.34.60 rm -rf venv
-    - ssh ec2-user@54.197.34.60 killall waitress-serve
+    - ssh ec2-user@54.197.34.60 rm -rf venv || true
+    - ssh ec2-user@54.197.34.60 killall waitress-serve || true
   script:
     - ssh ec2-user@54.197.34.60 "virtualenv venv && source venv/bin/activate && pip install --upgrade hellobluenove && waitress-serve --call 'hellobluenove:create_app' &"
