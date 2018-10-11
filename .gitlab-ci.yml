@@ -1,6 +1,21 @@
+stages:
+  - test
+  - build
+  - integration
+  - deploy
 test:
   before_script:
     - apt-get update -qy
     - apt-get install -y python-dev python-pip
     - pip install -r requirements.txt
   script: pytest
+build:
+  stage: build
+  before_script:
+    - apt-get update -qy
+    - apt-get install -y python-dev python-pip
+    - pip install --upgrade twine
+    - pip install -r requirements.txt
+  script:
+    - python setup.py bdist_wheel
+    - twine upload -u cedricmessiant --repository-url https://pypi.org/project/Hello-Bluenove/ dist/*
