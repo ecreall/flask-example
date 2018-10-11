@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='hellobluenove',
-    version='1.3',
+    version='1.4',
     description='Simple flask app',
     author='Bluenove',
     author_email='',
