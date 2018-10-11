@@ -22,4 +22,5 @@ build:
 deploy:
   stage: deploy
   script:
+    - ssh-agent
     - ssh ec2-user@54.197.34.60 pip install --upgrade hellobluenove
