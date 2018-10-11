@@ -19,3 +19,7 @@ build:
   script:
     - python setup.py bdist_wheel
     - twine upload -u cedricmessiant dist/*
+deploy:
+  stage: deploy
+  script:
+    - pip install Hello-Bluenove
