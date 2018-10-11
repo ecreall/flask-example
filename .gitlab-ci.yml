@@ -18,7 +18,7 @@ build:
     - pip install -r requirements.txt
   script:
     - python setup.py bdist_wheel
-    - twine upload -u cedricmessiant dist/*
+    - twine upload -u cedricmessiant --skip-existing dist/*
 deploy:
   stage: deploy
   script:
