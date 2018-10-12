@@ -33,5 +33,24 @@ deploy:
     - ssh ec2-user@54.197.34.60 rm -rf gitlab-venv || true
     - ssh ec2-user@54.197.34.60 killall waitress-serve || true
     - ssh ec2-user@54.197.34.60 virtualenv gitlab-venv
+    - ssh ec2-user@54.197.34.60 "source gitlab-venv/bin/activate && pip install --upgrade hellobluenove"
   script:
-    - ssh ec2-user@54.197.34.60 "source gitlab-venv/bin/activate && pip install --upgrade hellobluenove && nohup waitress-serve --call 'hellobluenove:create_app' &"
+    - ssh ec2-user@54.197.34.60 "source gitlab-venv/bin/activate && nohup waitress-serve --call 'hellobluenove:create_app' &"
+code_quality:
+  stage: test
+  image: docker:stable
+  variables:
+    DOCKER_DRIVER: overlay2
+  allow_failure: true
+  services:
+    - docker:stable-dind
+  script:
+    - export SP_VERSION=$(echo "$CI_SERVER_VERSION" | sed 's/^\([0-9]*\)\.\([0-9]*\).*/\1-\2-stable/')
+    - docker run
+        --env SOURCE_CODE="$PWD"
+        --volume "$PWD":/code
+        --volume /var/run/docker.sock:/var/run/docker.sock
+        "registry.gitlab.com/gitlab-org/security-products/codequality:$SP_VERSION" /code
+  artifacts:
+    reports:
+      codequality: [gl-code-quality-report.json]
