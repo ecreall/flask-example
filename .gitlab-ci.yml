@@ -35,7 +35,8 @@ deploy:
     - ssh ec2-user@54.197.34.60 virtualenv gitlab-venv
     - ssh ec2-user@54.197.34.60 "source gitlab-venv/bin/activate && pip install --upgrade hellobluenove"
   script:
-    - ssh ec2-user@54.197.34.60 "source gitlab-venv/bin/activate && nohup waitress-serve --call 'hellobluenove:create_app' &"
+    - ssh ec2-user@54.197.34.60 "source gitlab-venv/bin/activate"
+#  && nohup waitress-serve --call 'hellobluenove:create_app' &"
 code_quality:
   stage: test
   image: docker:stable
