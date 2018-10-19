@@ -5,7 +5,7 @@ build_wheel:
     - pip install --upgrade bumpversion
     - git config --global user.email "cedric.messiant@gmail.com"
     - git config --global user.name "Cédric Messiant"
-    - git remote set-url github git@github.com:ecreall/flask-example.git
+    - git remote add github git@github.com:ecreall/flask-example.git
     - git fetch github
   script:
     - git checkout master
