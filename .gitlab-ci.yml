@@ -1,8 +1,8 @@
-image: python:2.7
+# image: python:2.7
 
 build_wheel:
   before_script:
-    - pip install --upgrade bumpversion
+    # - pip install --upgrade bumpversion
     - git config --global user.email "cedric.messiant@gmail.com"
     - git config --global user.name "Cédric Messiant"
     - git remote add github git@github.com:ecreall/flask-example.git
@@ -17,7 +17,7 @@ build_wheel:
     - git fetch github
   script:
     - git checkout master
-    - bumpversion minor
+    # - bumpversion minor
     - git status
     - git diff
     - git push github
