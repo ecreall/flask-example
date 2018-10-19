@@ -1,8 +1,6 @@
 image: python:2.7
 
 build_wheel:
-  variables:
-    CI_DEBUG_TRACE: "true"
   before_script:
     - pip install --upgrade bumpversion
     - git config --global user.email "cedric.messiant@gmail.com"
@@ -19,8 +17,10 @@ build_wheel:
     - ssh-keyscan -H github.com >> ~/.ssh/known_hosts
     - git fetch github
   script:
-    - git checkout github/test-gitlab
+    - git checkout -b bumpversion
     - bumpversion minor
+    - git checkout -B test-gitlab bumpversion
+    - git branch -d bumpversion
     - git status
     - git diff
     - git push github test-gitlab
