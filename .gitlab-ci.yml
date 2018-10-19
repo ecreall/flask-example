@@ -11,10 +11,13 @@ build_wheel:
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
+    - touch ~/.ssh/known_hosts
+    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
     - git fetch github
   script:
     - git checkout master
     - bumpversion minor
     - git status
     - git diff
-    - git push github HEAD:add_build_job
+    - git push github
