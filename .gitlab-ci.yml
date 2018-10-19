@@ -6,6 +6,11 @@ build_wheel:
     - git config --global user.email "cedric.messiant@gmail.com"
     - git config --global user.name "Cédric Messiant"
     - git remote add github git@github.com:ecreall/flask-example.git
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
     - git fetch github
   script:
     - git checkout master
